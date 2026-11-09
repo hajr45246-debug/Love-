@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <thread>
+#include <chrono>
+using namespace std;
+
+int main()
+{
+    string text = "love you ";
+    int index = 0;
+
+    cout << "\033[31m";
+
+    for (double y = 1.5; y >= -1.5; y -= 0.1)
+    {
+        for (double x = -1.5; x <= 1.5; x += 0.05)
+        {
+            double a = x * x + y * y - 1;
+
+            if (a * a * a - x * x * y * y * y <= 0)
+            {
+                cout << text[index % text.length()] << flush;
+                index++;
+
+                this_thread::sleep_for(
+                    chrono::milliseconds(15)
+                );
+            }
+            else
+            {
+                cout << " ";
+            }
+        }
+
+        cout << endl;
+    }
+
+    cout << "\033[0m";
+
+    return 0;
+}
